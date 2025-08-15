@@ -4,7 +4,7 @@ import SolanaWallet from "./components/SolanaWallet";
 
 function App() {
   return (
-    <div className="min-h-screen min-w-screen bg-neutral-950 text-neutral-200 overflow-hidden">
+    <div className="min-h-screen w-full bg-neutral-950 text-neutral-200">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Dashboard />} />

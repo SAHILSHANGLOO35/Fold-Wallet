@@ -5,8 +5,8 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-w-screen">
-      <div className="sticky min-h-screen mx-44 px-4 border-l border-r border-neutral-400/20">
+    <div>
+      <div className="min-h-screen mx-44 px-4 border-l border-r border-neutral-400/20 pb-32 overflow-x-hidden">
         {/* Navbar */}
         <div className="flex gap-2 items-center h-32">
           <div className="flex">
