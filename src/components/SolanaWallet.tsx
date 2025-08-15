@@ -1,0 +1,137 @@
+import { useState } from "react";
+import { generateMnemonic } from "bip39";
+import { ChevronDown, ChevronUp, WalletMinimal } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+
+export default function SolanaWallet() {
+  const [mnemonic, setMnemonic] = useState<string[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [walletGenerated, setWalletGenerated] = useState(false);
+
+  const handleGenerateMnemonic = async () => {
+    const mn = await generateMnemonic();
+    setMnemonic(mn.split(" "));
+    setIsOpen(false);
+    setWalletGenerated(true);
+  };
+
+  return (
+    <div className="min-h-screen min-w-screen text-neutral-200 overflow-hidden">
+      <div className="sticky min-h-screen mx-44 px-4 border-l border-r border-neutral-400/20">
+        {/* Navbar */}
+        <div className="flex gap-2 items-center h-32">
+          <WalletMinimal className="text-white" size={32} />
+          <div className="font-extrabold text-4xl text-white manrope">Fold</div>
+        </div>
+
+        {/* Content */}
+        <div className="max-w-full max-h-full relative">
+          <AnimatePresence mode="wait">
+            {!walletGenerated && (
+              <motion.div
+                key="intro"
+                initial={{ opacity: 0, y: -40 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{
+                  duration: 0.5,
+                  ease: "easeInOut",
+                }}
+                className="flex flex-col gap-4 absolute inset-0"
+              >
+                <div className="text-5xl font-bold tracking-tight text-white">
+                  Your Secret Recovery Seed Phrase.
+                </div>
+                <div className="text-neutral-300 text-xl">
+                  Memorize these, save these, or put them inside a locker.
+                </div>
+                <button
+                  className="bg-white max-w-52 hover:bg-neutral-200 transition-all duration-200 text-black px-8 py-2 rounded-md cursor-pointer"
+                  onClick={handleGenerateMnemonic}
+                >
+                  Generate Wallet
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <AnimatePresence mode="wait">
+            {walletGenerated && (
+              <motion.div
+                key="wallet"
+                initial={{ opacity: 0, y: -40 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{
+                  duration: 0.5,
+                  ease: "easeInOut",
+                  delay: 0.2,
+                }}
+                className="absolute inset-0"
+              >
+                <div
+                  className="border border-neutral-400/20 rounded-md px-8 py-8 cursor-pointer transition-all duration-200"
+                  onClick={() => setIsOpen(!isOpen)}
+                >
+                  {/* Header */}
+                  <div className="w-full flex items-center justify-between text-2xl md:text-3xl font-bold tracking-tighter">
+                    <span className="leading-none">See Your Secret Phrase</span>
+                    <span className="flex items-center justify-center hover:bg-neutral-800 rounded-md transition-all duration-200 px-3 py-2">
+                      {isOpen ? (
+                        <ChevronUp size={22} />
+                      ) : (
+                        <ChevronDown size={22} />
+                      )}
+                    </span>
+                  </div>
+
+                  {/* Mnemonic Grid */}
+                  <motion.div
+                    initial={false}
+                    animate={{
+                      height: isOpen ? "auto" : 0,
+                      opacity: isOpen ? 1 : 0,
+                      marginTop: isOpen ? 24 : 0,
+                    }}
+                    transition={{
+                      duration: 0.4,
+                      ease: "easeOut",
+                    }}
+                    className="overflow-hidden"
+                  >
+                    <div className="grid grid-cols-3 gap-4">
+                      {mnemonic.map((word, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{
+                            opacity: isOpen ? 1 : 0,
+                            y: isOpen ? 0 : -10,
+                          }}
+                          transition={{
+                            delay: isOpen ? index * 0.03 : 0,
+                            duration: 0.3,
+                            ease: "easeOut",
+                          }}
+                          className="rounded-md px-4 py-4 text-start"
+                          style={{
+                            background: "rgba(250, 250, 250, 0.05)",
+                          }}
+                        >
+                          <span className="text-neutral-400 text-sm">
+                            {index + 1}.
+                          </span>{" "}
+                          {word}
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+    </div>
+  );
+}
