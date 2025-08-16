@@ -28,10 +28,11 @@ export default function EthWallet() {
     setIsOpen(false);
     setWalletGenerated(true);
     saveToLocalStorage(words, publicKeys, privateKeys);
+    await handleAddWallet(words);
   };
 
-  const handleAddWallet = async () => {
-    const seed = await mnemonicToSeed(mnemonic.join(" "));
+  const handleAddWallet = async (mnemonicWords = mnemonic) => {
+    const seed = await mnemonicToSeed(mnemonicWords.join(" "));
     const path = `m/44'/60'/${currentIndex}'/0'`;
     const hdNode = HDNodeWallet.fromSeed(seed);
     const child = hdNode.derivePath(path);
@@ -230,7 +231,7 @@ export default function EthWallet() {
 
                       <button
                         className="bg-white hover:bg-neutral-200 transition-all duration-200 text-black px-6 py-3 sm:px-8 sm:py-2 manrope regular rounded-md cursor-pointer w-full sm:w-auto"
-                        onClick={handleAddWallet}
+                        onClick={() => handleAddWallet()}
                       >
                         Add Wallet
                       </button>

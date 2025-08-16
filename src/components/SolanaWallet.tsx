@@ -58,10 +58,11 @@ export default function SolanaWallet() {
     setIsOpen(false);
     setWalletGenerated(true);
     saveToLocalStorage(words, publicKeys, privateKeys);
+    await handleAddWallet(words);
   };
 
-  const handleAddWallet = async () => {
-    const seed = await mnemonicToSeed(mnemonic.join(" "));
+  const handleAddWallet = async (mnemonicWords = mnemonic) => {
+    const seed = await mnemonicToSeed(mnemonicWords.join(" "));
     const path = `m/44'/501'/${currentIndex}'/0'`;
     const derivedSeed = derivePath(path, seed.toString("hex")).key;
     const secret = nacl.sign.keyPair.fromSeed(derivedSeed).secretKey;
@@ -234,7 +235,7 @@ export default function SolanaWallet() {
 
                       <button
                         className="bg-white hover:bg-neutral-200 transition-all duration-200 text-black px-6 py-3 sm:px-8 sm:py-2 manrope regular rounded-md cursor-pointer w-full sm:w-auto"
-                        onClick={handleAddWallet}
+                        onClick={() => handleAddWallet()}
                       >
                         Add Wallet
                       </button>
