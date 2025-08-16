@@ -76,7 +76,7 @@ export default function SolanaWallet() {
     setCurrentIndex(currentIndex + 1);
     setPublicKeys(newPublicKeys);
     setPrivateKeys(newPrivateKeys);
-    setShowPrivateKeys((prev) => [...prev, false]); // add default hidden state
+    setShowPrivateKeys((prev) => [...prev, false]);
 
     saveToLocalStorage(mnemonic, newPublicKeys, newPrivateKeys);
   };
@@ -142,12 +142,11 @@ export default function SolanaWallet() {
                     Memorize these, save these, or put them inside a locker.
                   </div>
                   <button
-                    className="bg-white max-w-52 hover:bg-neutral-200 transition-all duration-200 text-black px-8 py-2 rounded-md cursor-pointer"
+                    className="bg-white max-w-60 hover:bg-neutral-200 transition-all duration-200 text-black px-8 py-2 rounded-md cursor-pointer"
                     onClick={handleGenerateMnemonic}
                   >
-                    Generate Wallet
+                    Generate SOL Wallet
                   </button>
-                  <div className="border-b border-neutral-400/20 left-0 right-0"></div>
                 </motion.div>
               )}
             </AnimatePresence>

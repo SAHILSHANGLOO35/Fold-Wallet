@@ -47,14 +47,18 @@ export default function Dashboard() {
             >
               Solana
             </div>
-            <div className="bg-white hover:bg-neutral-200 transition-all duration-200 text-black px-8 py-2 manrope regular rounded-md cursor-pointer">
-              Etherium
+            <div
+              className="bg-white hover:bg-neutral-200 transition-all duration-200 text-black px-8 py-2 manrope regular rounded-md cursor-pointer"
+              onClick={() => navigate("/eth-wallet")}
+            >
+              Ethereum
             </div>
           </div>
         </div>
 
         <div className="border-b bottom-20 border-neutral-400/20 absolute left-0 right-0" />
 
+        {/* Footer */}
         <div className="absolute bottom-7">
           <div className="text-white text-md manrope regular">
             Designed and Developed by Sahil Shangloo ~ AKA{" "}
