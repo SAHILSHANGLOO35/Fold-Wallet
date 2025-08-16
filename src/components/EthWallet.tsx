@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { generateMnemonic, mnemonicToSeed } from "bip39";
 import {
   ChevronDown,
@@ -27,6 +27,7 @@ export default function EthWallet() {
     setMnemonic(words);
     setIsOpen(false);
     setWalletGenerated(true);
+    saveToLocalStorage(words, publicKeys, privateKeys);
   };
 
   const handleAddWallet = async () => {
@@ -44,7 +45,37 @@ export default function EthWallet() {
     setPublicKeys(newPublicKeys);
     setPrivateKeys(newPrivateKeys);
     setShowPrivateKeys((prev) => [...prev, false]);
+
+    saveToLocalStorage(mnemonic, newPublicKeys, newPrivateKeys);
   };
+
+  // Save to localStorage
+  const saveToLocalStorage = (
+    mnemonicWords: string[],
+    pubKeys: string[],
+    privKeys: string[]
+  ) => {
+    localStorage.setItem("ethMnemonic", JSON.stringify(mnemonicWords));
+    localStorage.setItem("ethPublicKeys", JSON.stringify(pubKeys));
+    localStorage.setItem("ethPrivateKeys", JSON.stringify(privKeys));
+  };
+
+  // Load from localStorage when component mounts
+  useEffect(() => {
+    const storedMnemonic = localStorage.getItem("ethMnemonic");
+    const storedPublicKeys = localStorage.getItem("ethPublicKeys");
+    const storedPrivateKeys = localStorage.getItem("ethPrivateKeys");
+
+    if (storedMnemonic && storedPublicKeys && storedPrivateKeys) {
+      setMnemonic(JSON.parse(storedMnemonic));
+      setPublicKeys(JSON.parse(storedPublicKeys));
+      setPrivateKeys(JSON.parse(storedPrivateKeys));
+      setWalletGenerated(true);
+      setShowPrivateKeys(
+        new Array(JSON.parse(storedPublicKeys).length).fill(false)
+      );
+    }
+  }, []);
 
   const togglePrivateKey = (index: number) => {
     setShowPrivateKeys((prev) => {

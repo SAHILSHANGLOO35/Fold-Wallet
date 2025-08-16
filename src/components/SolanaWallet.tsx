@@ -29,16 +29,16 @@ export default function SolanaWallet() {
     pubKeys: string[],
     privKeys: string[]
   ) => {
-    localStorage.setItem("mnemonic", JSON.stringify(mnemonicWords));
-    localStorage.setItem("publicKeys", JSON.stringify(pubKeys));
-    localStorage.setItem("privateKeys", JSON.stringify(privKeys));
+    localStorage.setItem("solanaMnemonic", JSON.stringify(mnemonicWords));
+    localStorage.setItem("solanaPublicKeys", JSON.stringify(pubKeys));
+    localStorage.setItem("solanaPrivateKeys", JSON.stringify(privKeys));
   };
 
   // Load from localStorage when component mounts
   useEffect(() => {
-    const storedMnemonic = localStorage.getItem("mnemonic");
-    const storedPublicKeys = localStorage.getItem("publicKeys");
-    const storedPrivateKeys = localStorage.getItem("privateKeys");
+    const storedMnemonic = localStorage.getItem("solanaMnemonic");
+    const storedPublicKeys = localStorage.getItem("solanaPublicKeys");
+    const storedPrivateKeys = localStorage.getItem("solanaPrivateKeys");
 
     if (storedMnemonic && storedPublicKeys && storedPrivateKeys) {
       setMnemonic(JSON.parse(storedMnemonic));
