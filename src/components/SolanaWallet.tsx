@@ -94,9 +94,9 @@ export default function SolanaWallet() {
   return (
     <div className="relative">
       <div className="min-h-screen text-neutral-200 overflow-x-hidden">
-        <div className="min-h-screen mx-44 px-4 border-l border-r border-neutral-400/20 pb-32 overflow-x-hidden">
+        <div className="min-h-screen mx-4 sm:mx-8 md:mx-16 lg:mx-32 xl:mx-44 px-4 border-l border-r border-neutral-400/20 pb-32 overflow-x-hidden">
           {/* Navbar */}
-          <div className="flex gap-2 items-center justify-between h-32">
+          <div className="flex gap-2 items-center justify-between h-20 sm:h-24 md:h-28 lg:h-32">
             <div
               className="flex items-center justify-center gap-2 cursor-pointer"
               onClick={() => navigate("/")}
@@ -104,7 +104,7 @@ export default function SolanaWallet() {
               <div className="flex">
                 <WalletMinimal className="text-white" size={32} />
               </div>
-              <div className="font-extrabold text-4xl text-white manrope bold">
+              <div className="font-extrabold text-2xl sm:text-3xl md:text-3xl lg:text-4xl text-white manrope bold">
                 Fold
               </div>
             </div>
@@ -112,7 +112,7 @@ export default function SolanaWallet() {
               href="https://github.com/SAHILSHANGLOO35/Fold-Wallet"
               target="_blank"
             >
-              <div className="text-white hover:bg-neutral-800 px-3 py-3 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300">
+              <div className="text-white hover:bg-neutral-800 px-2 py-2 sm:px-3 sm:py-3 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300">
                 <Github size={28} />
               </div>
             </a>
@@ -121,7 +121,7 @@ export default function SolanaWallet() {
           <div className="border-b border-neutral-400/20 absolute left-0 right-0"></div>
 
           {/* Content */}
-          <div className="max-w-full max-h-full relative pt-8 pb-8">
+          <div className="max-w-full max-h-full relative pt-6 pb-6 sm:pt-7 sm:pb-7 md:pt-8 md:pb-8">
             <AnimatePresence mode="wait">
               {!walletGenerated && (
                 <motion.div
@@ -133,16 +133,16 @@ export default function SolanaWallet() {
                     duration: 0.5,
                     ease: "easeInOut",
                   }}
-                  className="flex flex-col gap-4 absolute inset-0 pt-8"
+                  className="flex flex-col gap-4 absolute inset-0 pt-6 sm:pt-7 md:pt-8"
                 >
-                  <div className="text-5xl font-bold tracking-tight text-white">
+                  <div className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight">
                     Your Secret Recovery Seed Phrase.
                   </div>
-                  <div className="text-neutral-300 text-xl">
+                  <div className="text-neutral-300 text-lg sm:text-xl">
                     Memorize these, save these, or put them inside a locker.
                   </div>
                   <button
-                    className="bg-white max-w-60 hover:bg-neutral-200 transition-all duration-200 text-black px-8 py-2 rounded-md cursor-pointer"
+                    className="bg-white max-w-60 hover:bg-neutral-200 transition-all duration-200 text-black px-6 py-3 sm:px-8 sm:py-2 rounded-md cursor-pointer"
                     onClick={handleGenerateMnemonic}
                   >
                     Generate SOL Wallet
@@ -166,15 +166,15 @@ export default function SolanaWallet() {
                   className="flex flex-col inset-0"
                 >
                   <div
-                    className="border border-neutral-400/20 rounded-md px-8 py-8 cursor-pointer transition-all duration-200"
+                    className="border border-neutral-400/20 rounded-md px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 cursor-pointer transition-all duration-200"
                     onClick={() => setIsOpen(!isOpen)}
                   >
                     {/* Header */}
-                    <div className="w-full flex items-center justify-between text-2xl md:text-3xl font-bold tracking-tighter manrope">
+                    <div className="w-full flex items-center justify-between text-xl sm:text-2xl md:text-3xl font-bold tracking-tighter manrope">
                       <span className="leading-none font-medium text-white">
                         See Your Secret Phrase
                       </span>
-                      <span className="flex items-center justify-center hover:bg-neutral-800 rounded-md transition-all duration-200 px-3 py-2">
+                      <span className="flex items-center justify-center hover:bg-neutral-800 rounded-md transition-all duration-200 px-2 py-1 sm:px-3 sm:py-2">
                         {isOpen ? (
                           <ChevronUp size={22} />
                         ) : (
@@ -197,7 +197,7 @@ export default function SolanaWallet() {
                       }}
                       className="overflow-hidden"
                     >
-                      <div className="grid grid-cols-3 gap-4">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 md:gap-4">
                         {mnemonic.map((word, index) => (
                           <motion.div
                             key={index}
@@ -211,7 +211,7 @@ export default function SolanaWallet() {
                               duration: 0.3,
                               ease: "easeOut",
                             }}
-                            className="rounded-md px-4 py-4 text-start"
+                            className="rounded-md px-3 py-3 sm:px-4 sm:py-4 text-start"
                             style={{
                               background: "rgba(250, 250, 250, 0.05)",
                             }}
@@ -219,7 +219,7 @@ export default function SolanaWallet() {
                             <span className="text-neutral-400 text-sm">
                               {index + 1}.
                             </span>{" "}
-                            {word}
+                            <span className="text-sm sm:text-base">{word}</span>
                           </motion.div>
                         ))}
                       </div>
@@ -227,13 +227,13 @@ export default function SolanaWallet() {
                   </div>
 
                   <div className="flex flex-col">
-                    <div className="flex items-center justify-between mt-4">
-                      <div className="text-2xl md:text-4xl font-bold tracking-tight text-white manrope">
+                    <div className="flex items-center justify-between mt-4 flex-col sm:flex-row gap-4 sm:gap-0">
+                      <div className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white manrope">
                         Solana Wallet
                       </div>
 
                       <button
-                        className="bg-white hover:bg-neutral-200 transition-all duration-200 text-black px-8 py-2 manrope regular rounded-md cursor-pointer"
+                        className="bg-white hover:bg-neutral-200 transition-all duration-200 text-black px-6 py-3 sm:px-8 sm:py-2 manrope regular rounded-md cursor-pointer w-full sm:w-auto"
                         onClick={handleAddWallet}
                       >
                         Add Wallet
@@ -252,28 +252,33 @@ export default function SolanaWallet() {
                           transition={{ duration: 0.4, ease: "easeOut" }}
                           className="text-neutral-100 border border-neutral-400/20 flex flex-col gap-2 rounded-md manrope"
                         >
-                          <div className="text-2xl p-4 md:text-3xl font-semibold tracking-tight text-white">
+                          <div className="text-xl sm:text-2xl md:text-3xl p-4 font-semibold tracking-tight text-white">
                             Wallet {index + 1}
                           </div>
-                          <div className="bg-neutral-800/50 p-4 flex flex-col gap-y-8 rounded-md">
+                          <div className="bg-neutral-800/50 p-4 flex flex-col gap-y-6 sm:gap-y-8 rounded-md">
                             <div className="flex flex-col gap-1">
-                              <span className="text-white">Public Key</span>
-                              <span className="text-neutral-200/80 regular">
+                              <span className="text-white text-sm sm:text-base">
+                                Public Key
+                              </span>
+                              <span className="text-neutral-200/80 regular text-sm sm:text-base break-all">
                                 {pk}
                               </span>
                             </div>
                             <div className="flex flex-col gap-1">
-                              <span className="text-white">Private Key</span>
-                              <div className="flex justify-between">
+                              <span className="text-white text-sm sm:text-base">
+                                Private Key
+                              </span>
+                              <div className="flex justify-between items-center">
                                 <input
                                   type={
                                     showPrivateKeys[index] ? "text" : "password"
                                   }
                                   value={privateKeys[index]}
-                                  className="text-neutral-200/80 regular pr-12 outline-none w-full"
+                                  className="text-neutral-200/80 regular pr-4 sm:pr-12 outline-none w-full bg-transparent text-sm sm:text-base"
+                                  readOnly
                                 />
                                 <div
-                                  className="hover:bg-neutral-700 px-2 py-1.5 rounded-md transition-all duration-200 cursor-pointer"
+                                  className="hover:bg-neutral-700 px-2 py-1.5 rounded-md transition-all duration-200 cursor-pointer flex-shrink-0"
                                   onClick={() => togglePrivateKey(index)}
                                 >
                                   {showPrivateKeys[index] ? (
@@ -295,10 +300,10 @@ export default function SolanaWallet() {
           </div>
 
           {/* Footer */}
-          <div className="border-b bottom-20 border-neutral-400/20 absolute left-0 right-0" />
+          <div className="border-b bottom-16 sm:bottom-20 border-neutral-400/20 absolute left-0 right-0" />
 
-          <div className="absolute bottom-7">
-            <div className="text-white text-md manrope regular">
+          <div className="absolute bottom-4 sm:bottom-7 left-8 right-4 sm:left-12 md:left-20 lg:left-36 xl:left-48">
+            <div className="text-white text-sm sm:text-md manrope regular">
               Designed and Developed by Sahil Shangloo ~ AKA{" "}
               <a
                 className="hover:text-neutral-400 inline-block scale-100 hover:scale-105 transition-all duration-200"
