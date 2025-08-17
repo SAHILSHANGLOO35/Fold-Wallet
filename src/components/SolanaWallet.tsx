@@ -3,6 +3,7 @@ import { generateMnemonic, mnemonicToSeed } from "bip39";
 import {
   ChevronDown,
   ChevronUp,
+  CircleDollarSign,
   Eye,
   EyeOff,
   Github,
@@ -253,8 +254,20 @@ export default function SolanaWallet() {
                           transition={{ duration: 0.4, ease: "easeOut" }}
                           className="text-neutral-100 border border-neutral-400/20 flex flex-col gap-2 rounded-md manrope"
                         >
-                          <div className="text-xl sm:text-2xl md:text-3xl p-4 font-semibold tracking-tight text-white">
-                            Wallet {index + 1}
+                          <div className="text-xl sm:text-2xl md:text-3xl p-4 font-semibold tracking-tight text-white flex items-center justify-between">
+                            <div>Wallet {index + 1}</div>
+                            <div
+                              className="hover:bg-neutral-700 px-2 py-1.5 rounded-md transition-all duration-200 cursor-pointer flex-shrink-0 flex items-center justify-center gap-2"
+                              onClick={() =>
+                                navigate(`/solana-wallet/${publicKeys[index]}`)
+                              }
+                            >
+                              <div className="text-[18px]">Account</div>
+                              <CircleDollarSign
+                                className="text-white"
+                                size={20}
+                              />
+                            </div>
                           </div>
                           <div className="bg-neutral-800/50 p-4 flex flex-col gap-y-6 sm:gap-y-8 rounded-md">
                             <div className="flex flex-col gap-1">

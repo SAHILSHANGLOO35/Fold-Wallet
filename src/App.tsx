@@ -2,6 +2,8 @@ import Dashboard from "./components/Dashboard";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import SolanaWallet from "./components/SolanaWallet";
 import EthWallet from "./components/EthWallet";
+import SolanaInfo from "./pages/SolanaInfo";
+import EthereumInfo from "./pages/EthereumInfo";
 
 function App() {
   return (
@@ -11,6 +13,8 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/solana-wallet" element={<SolanaWallet />} />
           <Route path="/eth-wallet" element={<EthWallet />} />
+          <Route path="/solana-wallet/:publicKey" element={<SolanaInfo />} />
+          <Route path="/eth-wallet/:publicKey" element={<EthereumInfo />} />
         </Routes>
       </BrowserRouter>
     </div>
